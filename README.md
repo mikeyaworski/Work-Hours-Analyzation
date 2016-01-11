@@ -40,11 +40,11 @@ How to Format:
 
 Example:
 
-Job 1:
--Jan 1, 2015; 4pm-8pm; 4h
+Job 1:  
+-Jan 1, 2015; 4pm-8pm; 4h  
 -Jan.2/15; 12-6; 0.5h break; 3.5h
 
-Job 2:
+Job 2:  
 -Jan. 3,15; 5.25
 
 Explanation:
@@ -74,18 +74,18 @@ This program may contain up to two optional arguments. The first argument will b
 - When the program writes the analysis to the file, it will also write it to the console. If it cannot access the output file for some reason, it will still print to the console.
 
 How to specifically use the JAR file:
-Arguments are separated by whitespace.
-Make sure you have Java linked in your PATH variable.
+Arguments are separated by whitespace.  
+Make sure you have Java linked in your PATH variable.  
 If that is the case, you make execute the JAR file in your command line (e.g. Windows Command Prompt) with the following example commands:
 
-No arguments:
-java -jar workhoursanalyzation.jar
+No arguments:  
+java -jar workhoursanalyzation.jar  
 
-Input file argument:
+Input file argument:  
 java -jar workhoursanalyzation.jar C:\MyPath\work_hours_input.txt
 
-Output file argument:
+Output file argument:  
 java -jar workhoursanalyzation.jar C:\MyPath\work_hours_input.txt C:\MyPath\work_hours_output.txt
 
-Output file argument with the input file remaining in the root directory (default):
+Output file argument with the input file remaining in the root directory (default):  
 java -jar workhoursanalyzation.jar work_hours.txt C:\MyPath\work_hours_output.txt
