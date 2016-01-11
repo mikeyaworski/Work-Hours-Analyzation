@@ -1,0 +1,101 @@
+package com.mikeyaworski.workhoursanalyzation;
+
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+
+ class Year {
+	
+	private String year = "", firstDate = "", lastDate = "";
+	private double hours = 0;
+	private List<Job> jobs = new ArrayList<Job>();
+	
+	public Year (String year, String firstDate, String lastDate, double hours) {
+		this.year = year;
+		this.firstDate = firstDate;
+		this.lastDate = lastDate;
+		this.hours = hours;
+	}
+	public Year (String year) {
+		this.year = year;
+	}
+	
+	public void addJob(Job job) {
+		jobs.add(job);
+		hours += job.getHours();
+	}
+	public void setJob(Job job, int jobIndex) {
+		jobs.set(jobIndex, job);
+	}
+	public List<Job> getJobs() {
+		return this.jobs;
+	}
+	public Job getJob(int index) {
+		if (index > -1) {
+			return this.jobs.get(index);
+		}
+		return null;
+	}
+	
+	@Override
+	public String toString() {
+		String str = "Year: " + this.year + "\nJobs: ";
+		
+		for (Job job : this.jobs) {
+			str += job.getName() + ", ";
+		}
+		str = str.substring(0, str.length() - 2); // remove last comma and space
+		
+		return str;
+	}
+	
+	public String getYear() {
+		return this.year;
+	}
+	public String getFirstDate() {
+		return this.firstDate;
+	}
+	public String getLastDate() {
+		return this.lastDate;
+	}
+	public String getHours() {
+		return Work_Hours_Analyzation.convertHoursToString(this.hours);
+	}
+	public double getRawHours() {
+		return this.hours;
+	}
+	public double getAverageHoursPerShift() {
+		return this.hours / getNumberOfShifts();
+	}
+	public int getNumberOfShifts() {
+		int numberOfShifts = 0;
+		for (Job job : this.jobs) {
+			numberOfShifts += job.getNumberOfShifts();
+		}
+		return numberOfShifts;
+	}
+	
+	public void setYear(String year) {
+		this.year = year;
+	}
+	public void setFirstDate(String firstDate) {
+		this.firstDate = firstDate;
+	}
+	public void setLastDate(String lastDate) {
+		this.lastDate = lastDate;
+	}
+	public void setHours(double hours) {
+		this.hours = hours;
+	}
+	public void addHours(double hours) {
+		this.hours += hours;
+	}
+
+	static class YearComparator implements Comparator<Year> {
+		@Override
+		public int compare(Year y1, Year y2) {
+			return Integer.parseInt(y2.getYear()) - Integer.parseInt(y1.getYear());
+		}
+	}
+
+}

@@ -1,0 +1,23 @@
+Service:
+-Dec 19/14; 5.5p-1a; .5h break; 7h
+-Sept 12/13; 4p-7p; 3h
+-Sept 13/13; 4p-8p; 4h
+-Jan 19/15; 5p-10.5p; .5h break; 5h
+-Dec 11/14; 5p-9.25p; 4.25h
+
+Bartending:
+-Jan 13/15; 5p-10.75p; .5h break; 5.25h
+-Oct 8/14; 4p-7p; 3h
+-Oct 25/14; 5p-9.5p; .5h break; 4h
+
+Setups:
+-Sept 27/13; 2p-7p; 5h
+-Sept 28/13; 7a-12.5p; .5h break; 5h
+
+CC:
+-Sept 23/13; 345p-715p; 3.75h
+-Jan 11/14; 5.5p-3.5a; .5h break; 9.25h
+-Oct 27/14; 7.5p-10.5p; 3h
+-Jan 16/15; 7.25p-11p; 3.75h
+-Oct 26/13; 4.5p-11p; .5h break; 6h
+-Jan 18/15; 7.25p-11p; 3.75h

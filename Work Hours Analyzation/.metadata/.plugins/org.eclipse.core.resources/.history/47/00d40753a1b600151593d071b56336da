@@ -1,0 +1,329 @@
+package com.mikeyaworski.workhoursanalyzation;
+
+import java.util.Calendar;
+import java.util.Calendar;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+public class Dates {
+
+	// return earliest date
+	public static String compareDatesFirst(List<String> dates) {
+		
+		// sort dates (via selection sort)
+		for (int i = 0; i < dates.size() - 1; i++) {
+			for (int j = i + 1; j < dates.size(); j++) {
+				if (compareDatesFirst(dates.get(i), dates.get(j)).equals(dates.get(j))) { // second date comes first
+					String temp = dates.get(i);
+					dates.set(i, dates.get(j));
+					dates.set(j,temp);
+				}
+			}
+		}
+		return dates.get(0); // return first index
+	}
+	// return latest date
+	public static String compareDatesLast(List<String> dates) {
+		
+		// sort dates (via selection sort)
+		for (int i = 0; i < dates.size() - 1; i++) {
+			for (int j = i + 1; j < dates.size(); j++) {
+				if (compareDatesFirst(dates.get(i), dates.get(j)).equals(dates.get(j))) { // second date comes first
+					String temp = dates.get(i);
+					dates.set(i, dates.get(j));
+					dates.set(j,temp);
+				}
+			}
+		}
+		return dates.get(dates.size() - 1); // return last index
+	}
+	
+	/* returns earliest date */
+	public static String compareDatesFirst(String firstDate, String secondDate) {
+		if (firstDate.equals("")) return secondDate;
+		if (secondDate.equals("")) return firstDate;
+		
+		String year1 = "";
+		String[] dateSplices11 = firstDate.split("/"), dateSplices12 = firstDate.split(",");
+		if (dateSplices11.length == 2) { // year was split by slash
+			year1 = dateSplices11[1];
+		} else if (dateSplices12.length == 2) { // year was split by comma
+			year1 = dateSplices12[1];
+		}
+		
+		if (year1.length() == 2) year1 = "20" + year1;
+		
+		String year2 = "";
+		dateSplices11 = secondDate.split("/");
+		dateSplices12 = secondDate.split(",");
+		if (dateSplices11.length == 2) { // year was split by slash
+			year2 = dateSplices11[1];
+		} else if (dateSplices12.length == 2) { // year was split by comma
+			year2 = dateSplices12[1];
+		}
+		
+		if (year2.length() == 2) year2 = "20" + year2;
+		
+		
+		String month1 = "", day1 = "";
+		String monthAndDay = firstDate.split("[/,]")[0];
+		dateSplices11 = monthAndDay.split("\\. ");
+		dateSplices12 = monthAndDay.split("\\.");
+		String[] dateSplices13 = monthAndDay.split(" ");
+		if (dateSplices11.length == 2) {
+			month1 = dateSplices11[0];
+			day1 = dateSplices11[1];
+		} else if (dateSplices12.length == 2) {
+			month1 = dateSplices12[0];
+			day1 = dateSplices12[1];
+		} else if (dateSplices13.length == 2) {
+			month1 = dateSplices13[0];
+			day1 = dateSplices13[1];
+		}
+		String month2 = "", day2 = "";
+		monthAndDay = secondDate.split("[/,]")[0];
+		dateSplices11 = monthAndDay.split("\\. ");
+		dateSplices12 = monthAndDay.split("\\.");
+		dateSplices13 = monthAndDay.split(" ");
+		if (dateSplices11.length == 2) {
+			month2 = dateSplices11[0];
+			day2 = dateSplices11[1];
+		} else if (dateSplices12.length == 2) {
+			month2 = dateSplices12[0];
+			day2 = dateSplices12[1];
+		} else if (dateSplices13.length == 2) {
+			month2 = dateSplices13[0];
+			day2 = dateSplices13[1];
+		}
+		
+		if (Integer.parseInt(year1) > Integer.parseInt(year2)) {
+			return secondDate;
+		} else if (Integer.parseInt(year1) < Integer.parseInt(year2)) {
+			return firstDate;
+		} else {
+			int monthNumber1 = getMonthNumber(month1), monthNumber2 = getMonthNumber(month2);
+			if (monthNumber1 > monthNumber2) {
+				return secondDate;
+			} else if (monthNumber1 < monthNumber2) {
+				return firstDate;
+			} else {
+				if (Integer.parseInt(day1) > Integer.parseInt(day2)) {
+					return secondDate;
+				} else if (Integer.parseInt(day1) < Integer.parseInt(day2)) {
+					return firstDate;
+				} else {
+					return firstDate;
+				}
+			}
+		}
+	}
+	/* returns latest date */
+	public static String compareDatesLast(String firstDate, String secondDate) {
+		
+		if (firstDate.equals("")) return secondDate;
+		if (secondDate.equals("")) return firstDate;
+		
+		String year1 = "";
+		String[] dateSplices11 = firstDate.split("/"), dateSplices12 = firstDate.split(",");
+		if (dateSplices11.length == 2) { // year was split by slash
+			year1 = dateSplices11[1];
+		} else if (dateSplices12.length == 2) { // year was split by comma
+			year1 = dateSplices12[1];
+		}
+		
+		if (year1.length() == 2) year1 = "20" + year1;
+		
+		String year2 = "";
+		dateSplices11 = secondDate.split("/");
+		dateSplices12 = secondDate.split(",");
+		if (dateSplices11.length == 2) { // year was split by slash
+			year2 = dateSplices11[1];
+		} else if (dateSplices12.length == 2) { // year was split by comma
+			year2 = dateSplices12[1];
+		}
+		
+		if (year2.length() == 2) year2 = "20" + year2;
+		
+		
+		String month1 = "", day1 = "";
+		String monthAndDay = firstDate.split("[/,]")[0];
+		dateSplices11 = monthAndDay.split("\\. ");
+		dateSplices12 = monthAndDay.split("\\.");
+		String[] dateSplices13 = monthAndDay.split(" ");
+		if (dateSplices11.length == 2) {
+			month1 = dateSplices11[0];
+			day1 = dateSplices11[1];
+		} else if (dateSplices12.length == 2) {
+			month1 = dateSplices12[0];
+			day1 = dateSplices12[1];
+		} else if (dateSplices13.length == 2) {
+			month1 = dateSplices13[0];
+			day1 = dateSplices13[1];
+		}
+		String month2 = "", day2 = "";
+		monthAndDay = secondDate.split("[/,]")[0];
+		dateSplices11 = monthAndDay.split("\\. ");
+		dateSplices12 = monthAndDay.split("\\.");
+		dateSplices13 = monthAndDay.split(" ");
+		if (dateSplices11.length == 2) {
+			month2 = dateSplices11[0];
+			day2 = dateSplices11[1];
+		} else if (dateSplices12.length == 2) {
+			month2 = dateSplices12[0];
+			day2 = dateSplices12[1];
+		} else if (dateSplices13.length == 2) {
+			month2 = dateSplices13[0];
+			day2 = dateSplices13[1];
+		}
+		
+		if (Integer.parseInt(year1) < Integer.parseInt(year2)) {
+			return secondDate;
+		} else if (Integer.parseInt(year1) > Integer.parseInt(year2)) {
+			return firstDate;
+		} else {
+			int monthNumber1 = getMonthNumber(month1), monthNumber2 = getMonthNumber(month2);
+			if (monthNumber1 < monthNumber2) {
+				return secondDate;
+			} else if (monthNumber1 > monthNumber2) {
+				return firstDate;
+			} else {
+				if (Integer.parseInt(day1) < Integer.parseInt(day2)) {
+					return secondDate;
+				} else if (Integer.parseInt(day1) > Integer.parseInt(day2)) {
+					return firstDate;
+				} else {
+					return firstDate;
+				}
+			}
+		}
+	}
+	
+	public static int getMonthNumber(String month) {
+		int iMonth = 1;
+		switch (month) {
+			case "Feb":
+				iMonth = 2;
+				break;
+			case "February":
+				iMonth = 2;
+				break;
+			case "Mar":
+				iMonth = 3;
+				break;
+			case "March":
+				iMonth = 3;
+				break;
+			case "Apr":
+				iMonth = 4;
+				break;
+			case "April":
+				iMonth = 4;
+				break;
+			case "May":
+				iMonth = 5;
+				break;
+			case "Jun":
+				iMonth = 6;
+				break;
+			case "June":
+				iMonth = 6;
+				break;
+			case "Jul":
+				iMonth = 7;
+				break;
+			case "July":
+				iMonth = 7;
+				break;
+			case "Aug":
+				iMonth = 8;
+				break;
+			case "August":
+				iMonth = 8;
+				break;
+			case "Sept":
+				iMonth = 9;
+				break;
+			case "September":
+				iMonth = 9;
+				break;
+			case "Oct":
+				iMonth = 10;
+				break;
+			case "October":
+				iMonth = 10;
+				break;
+			case "Nov":
+				iMonth = 11;
+				break;
+			case "November":
+				iMonth = 11;
+				break;
+			case "Dec":
+				iMonth = 12;
+				break;
+			case "December":
+				iMonth = 12;
+				break;
+			default:
+				break;
+		}
+		return iMonth - 1;
+	}
+	
+	public static double weekDifference(String date1, String date2) {
+		
+		String year1 = "";
+		String[] dateSplice = date1.split("[,/]");			
+		year1 = dateSplice[1];
+		if (year1.length() == 2) year1 = "20" + year1;
+		String year2 = "";
+		dateSplice = date2.split("[,/]");
+		year2 = dateSplice[1];
+		if (year2.length() == 2) year2 = "20" + year2;
+		
+		String month1 = "", day1 = "";
+		String monthAndDay = date1.split("[/,]")[0];
+		String[] dateSplices1 = monthAndDay.split("\\. ");
+		String[] dateSplices2 = monthAndDay.split("\\.");
+		String[] dateSplices3 = monthAndDay.split(" ");
+		if (dateSplices1.length == 2) {
+			month1 = dateSplices1[0];
+			day1 = dateSplices1[1];
+		} else if (dateSplices2.length == 2) {
+			month1 = dateSplices2[0];
+			day1 = dateSplices2[1];
+		} else if (dateSplices3.length == 2) {
+			month1 = dateSplices3[0];
+			day1 = dateSplices3[1];
+		}
+		String month2 = "", day2 = "";
+		monthAndDay = date2.split("[/,]")[0];
+		dateSplices1 = monthAndDay.split("\\. ");
+		dateSplices2 = monthAndDay.split("\\.");
+		dateSplices3 = monthAndDay.split(" ");
+		if (dateSplices1.length == 2) {
+			month2 = dateSplices1[0];
+			day2 = dateSplices1[1];
+		} else if (dateSplices2.length == 2) {
+			month2 = dateSplices2[0];
+			day2 = dateSplices2[1];
+		} else if (dateSplices3.length == 2) {
+			month2 = dateSplices3[0];
+			day2 = dateSplices3[1];
+		}
+		
+		Calendar startDate = Calendar.getInstance();
+		Calendar endDate   = Calendar.getInstance();
+		startDate.set(Integer.parseInt(year1) + 1900, getMonthNumber(month1), Integer.parseInt(day1));
+		endDate.set(Integer.parseInt(year2) + 1900, getMonthNumber(month2), Integer.parseInt(day2));
+
+		// getTime() from Calendar returns Date. getTime() from Date returns time in milliseconds.
+		long duration  = endDate.getTime().getTime() - startDate.getTime().getTime();
+		long diffInHours = TimeUnit.MILLISECONDS.toHours(duration)+24;
+		double hoursInWeek = 168.0; // 24 * 7
+		
+		return diffInHours / hoursInWeek;
+		
+	}
+	
+}
